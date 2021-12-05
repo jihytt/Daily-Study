@@ -1,0 +1,39 @@
+SpringMVC 초기 설정
+
+이클립스 dtd(config.xml, mapper.xml) 파일 등록
+Window - Preferences - XmlCatalog
+
+
+01. pom.xml : 프로젝트 버전 및 설정 관리, 빌드 환경, 라이브러리 저장소 및 의존성 등
+	dependancy 추가
+	ojdbc6, mybatis, mybatis-spring, commons-dbcp, spring-orm 등
+	
+	https://search.maven.org/
+	https://mvnrepository.com/
+	
+02. web.xml : 웹에 관련한 설정을 모아둔 파일
+설정파일의 경로를 바꿔놓았으니 web.xml에서 변경된 경로로 작성해준다.
+root-context.xml 을 appServlet 폴더 안에 넣고 applicationContext.xml으로 이름 변경
+-> root-context를 이렇게 변경
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/appServlet/applicationContext.xml</param-value>
+</context-param>
+
+servlet-mapping 의 url-pattern 변경, filter추가
+
+02-1. index.jsp 생성
+02-2. homeController - home.do
+
+03. /WEB-INF/spring/sqls/test.sql
+04. dto, dao, biz, controller
+Mybatis 설정
+
+05. src/main/resources/mybatis/myboard-mapper.xml (config에서 alias 설정)
+06. src/main/resources/mybatis/db.properties
+07. /WEB-INF/spring/sqls/config.xml
+08. applicationContext.xml
+
+_filter
+09. com.mvc.upgrade.common.filter/LogFilter (impl javax.servlet.Filter)
+10. web.xml 에 방금 우리가 만든 로그필터를 설정!

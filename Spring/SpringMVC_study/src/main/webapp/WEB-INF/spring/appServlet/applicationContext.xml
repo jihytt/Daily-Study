@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!--
+	root-context.xml : mvc 설정과 관련된 여러 처리를 담당하는 설정 파일
+	xml의 형태를 어떻게 사용할 것인가 빈(객체)들을 관리하는 문서(xml)이다.
+	내가 생성한 프로젝트에서 사용할 값들 중 변하지 않고, 여기저기에서 사용할 수 있는 것들을 property로서
+	입력해놓고, 그것을 beans화 하여 여러 곳에서 따로 beans를 선언하지 않고 사용하도록 설정하는 일을 한다.
+	(bean태그를 사용해서 등록한다. id="빈의 이름" class="클래스의 위치")
+	
+	- root-context에 등록되는 빈들은 모든 컨텍스트에서 사용할 수 있다. (공유 가능)
+	- service나 dao를 포함한, 웹 환경에 독립적인 빈들을 담아둔다.
+	- 서로다른 servlet-context에서 공유해야 하는 빈들을 등록해놓고 사용할 수 있다.
+	- servlet-context 내 빈들은 이용 불가능.
+	-->
+	
+	<!-- classpath: src/main/resources/ 연결해준다. -->
+	<!-- db.properties에서 데이터 가져오기 -->
+	<!-- locations는  -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:mybatis/db.properties</value>
+			</list>		
+		</property>
+	</bean>
+	
+	<!-- dataSource 등록 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+	
+	<!-- [Mybatis 주요 객체 sessionFactory클래스 빈등록] -->
+	<!-- sql 사용 시 factory 필요 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- setter를 통한 의존성 주입 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- Mybatis 설정 파일을 변수 configLocation에 저장 -->
+		<property name="configLocation" value="WEB-INF/spring/sqls/config.xml"/>
+	</bean>
+	
+	<!-- Mybatis를 쉽게 사용할 Template 클래스 빈등록 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+		
+</beans>
