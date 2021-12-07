@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jh.study.model.biz.MyBoardBiz;
+import com.jh.study.model.dto.MyBoardDto;
 
 @Controller
 public class MyBoardController {
@@ -33,6 +34,50 @@ public class MyBoardController {
 		model.addAttribute("dto", biz.selectOne(myno));
 		
 		return "myboardselect";
+	}
+	
+	@RequestMapping("/insertform.do")
+	public String insertform() {
+		return "myboardinsert";
+	}
+	
+	@RequestMapping("/insertres.do")
+	public String insertres(MyBoardDto dto) {
+		// Spring이 내부적으로 컨트롤러에 오기 전에 전달된 데이터를 dto에 넣어준다. (커맨드 객체) 
+		if (biz.insert(dto) > 0) {
+			// redirect를 붙이지 않으면 view에서 찾게 된다.
+			return "redirect:list.do";
+		}
+		// 실패 시
+		return "redirect:insertform.do";
+	}
+	
+	@RequestMapping("/updateform.do")
+	public String updateform(Model model, int myno) {
+		
+		model.addAttribute("dto", biz.selectOne(myno));
+		
+		return "myboardupdate";
+	}
+	
+	@RequestMapping("/updateres.do")
+	public String updateres(MyBoardDto dto) {
+		
+		if(biz.update(dto) > 0) {
+			return "redirect:select.do?myno="+dto.getMyno();
+		}
+		
+		return "redirect:updateform.do?myno="+dto.getMyno();
+	}
+	
+	@RequestMapping("/delete.do")
+	public String delete(int myno) {
+		
+		if (biz.delete(myno) > 0) {
+			return "redirect:list.do";
+		}
+		
+		return "redirect:select.do?myno="+myno;
 	}
 
 }

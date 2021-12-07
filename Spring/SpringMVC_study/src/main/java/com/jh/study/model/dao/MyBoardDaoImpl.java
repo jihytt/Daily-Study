@@ -56,7 +56,7 @@ public class MyBoardDaoImpl implements MyBoardDao {
 	public int update(MyBoardDto dto) {
 		int res = 0;
 		try {
-			sqlSession.update(NAMESPACE+"update", dto);
+			res = sqlSession.update(NAMESPACE+"update", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -35,5 +35,5 @@ Mybatis 설정
 08. applicationContext.xml
 
 _filter
-09. com.mvc.upgrade.common.filter/LogFilter (impl javax.servlet.Filter)
-10. web.xml 에 방금 우리가 만든 로그필터를 설정!
+09. com.jh.study.common.filter/LogFilter (impl javax.servlet.Filter)
+10. web.xml에 만든 로그필터를 설정

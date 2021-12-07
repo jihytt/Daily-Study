@@ -40,6 +40,9 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		<tr>
+			<td colspan="4" align="right"><input type="button" value="글작성" onclick="location.href='insertform.do'"/></td>
+		</tr>
 	</table>
 </body>
 </html>
