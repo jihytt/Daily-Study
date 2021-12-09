@@ -37,3 +37,10 @@ Mybatis 설정
 _filter
 09. com.jh.study.common.filter/LogFilter (impl javax.servlet.Filter)
 10. web.xml에 만든 로그필터를 설정
+
+_aop
+11. pom.xml : dependency - aspectjweaver, aspectjrt
+12. com.jh.study.common.aop/LogAop
+13. WEB-INF/spring/appServlet/aop-context.xml
+14. aop를 web.xml에 등록하자
+15. src/main/resources/log4j.xml

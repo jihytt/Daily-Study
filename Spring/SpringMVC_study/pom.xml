@@ -143,6 +143,17 @@
 		  <artifactId>spring-orm</artifactId>
 		  <version>${org.springframework-version}</version>
 		</dependency>
+		<!-- aspectj 관련 라이브러리 -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version> 
+		</dependency>
 		      
 	</dependencies>
     <build>
