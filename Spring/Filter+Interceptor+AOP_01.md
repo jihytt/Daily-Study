@@ -52,6 +52,8 @@
 
 
 <br/>
+<br/>
+
 
 >## 2. Filter
 
@@ -73,6 +75,7 @@
 
 필터는 정보를 변경하는 역할 뿐만 아니라 흐름을 변경하는 역할도 할 수 있다. 즉, 필터는 클라이언트의 요청을 필터 체인의 다음 단계(결과적으로는 클라이언트가 요청한 자원)에 보내는 것이 아니라 다른 자원의 결과를 클라이언트에 전송할 수 있다.
 
+<br/>
 <br/>
 
 >### **필터가 필요한 이유**
@@ -117,17 +120,89 @@ String param = request.getParameter("param");
 
 
 <br/>
+<br/>
 
 >## 2-1. Filter 생성
 
+<br/>
 
-
-- `init()` - 필터 인스턴스 초기화
-- `doFilter()` - 전/후 처리
-- `destroy()` - 필터 인스턴스 종료
+`Filter`를 사용하기 위해서는 어떤 필터가 어떤 자원에 대해서 적용된다는 것을 서블릿/JSP컨테이너에게 알려주어야 한다. 서블릿 설정은 web.xml 파일을 통해 하고 있다.   
+<span style="color:gray">web.xml은 톰캣이 실행될 때 처음으로 읽어들이는 설정 파일</span>   
 
 <br/>
 
+```java
+	<!-- filter 한글 처리 코드 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+```   
 
+위의 등록한 filter의 이름은 encodingFilter이고, 값은 UTF-8인 파라미터를 정의하고 있다.   
+필터의 url-pattern을 /*로 정의하면, servlet, jsp 뿐만 아니라 이미지와 같은 모든 자원의 요청에도 호출된다.   
+
+<br/>
+
+위와 같이 필터를 web.xml에 바로 지정할 수 있지만, **사용자가 따로 필터클래스를 생성해서 필터를 적용시킬 수도 있다.**
+
+<br/>
+<br/>
+
+>### **필터관련 인터페이스 및 클래스**
+필터를 구현하는 데 있어 핵심적인 역할을 하는 인터페이스 및 클래스   
+<br/>
+
+**`javax.servlet.Filter` 인터페이스**   
+- *클라이언트와 최종 자원 사이에 위치하는 필터를 나타내는 객체가 구현해야 하는 인터페이스* 
+
+**`javax.servlet.ServletRequestWrapper`, `javax.servlet.ServletResponseWrapper`   클래스**
+- *필터가 요청을 변경한 결과 또는 응답을 변경할 결과를 저장할 래퍼 클래스. 개발자는 이 두 클래스를 알맞게 상속하여 요청/응답 정보를 변경하면 된다.*
+
+<br/>
+<br/>
+
+>### ***javax.servlet.Filter* 메소드**
+
+
+- **public void init(FilterConfig filterConfig) throws ServletException**   
+필터 인스턴스 초기화
+- **public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws java.io.IOException, ServletException**   
+전/후 처리, 체인을 따라 다음에 존재하는 필터로 이동한다. 체인의 가장 마지막에는 클라이언트가 요청한 최종 자원이 위치
+- **public void destroy()**   
+필터 인스턴스 종료
+
+<br/>
+<br/>
+
+>### **doFilter()의 흐름**
+
+1. request 파라미터를 이용하여 클라이언트의 요청 필터링
+2. chain.doFilter() 메소드 호출
+3. response 파라미터를 사용해 클라이언트로 가는 응답 필터링
+
+<br/>
+
+doFilter()메소드는 세번째 파라미터로 FilterChain 객체를 전달받는데, 이는 클라이언트가 요청한 자원에 이르기까지 클라이언트의 요청이 가쳐가게 되는 필터 체인을 나타낸다. **FilterChain을 사용함으로써 필터는 체인에 있는 다음 필터에 변경한 요청과 응답을 건내줄 수 있다.**
+
+<br/>
+<br/>
+
+*필터 체인의 순서는 <filter-mapping>이 정의된 순서를 기준으로 정렬.
+
+<br/>
+<br/>
 
 내용 참조 : https://goddaehee.tistory.com/154, https://yzlosmik.tistory.com/24, https://dololak.tistory.com/602
