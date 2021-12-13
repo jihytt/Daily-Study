@@ -210,16 +210,6 @@ contextConfigLocation - /WEB-INF/spring/appServlet/aop-context.xml
 <br/>
 
 5. **src/main/resources/log4j.xml**
-    ```xml
-        <!-- Root Logger -->
-        <root>
-            <priority value="info" />
-            <appender-ref ref="console" />
-        </root>
-    ```
-
-
-
 
 
 

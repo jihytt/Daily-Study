@@ -44,3 +44,10 @@ _aop
 13. WEB-INF/spring/appServlet/aop-context.xml
 14. aop를 web.xml에 등록하자
 15. src/main/resources/log4j.xml
+
+_login
+16. pom.xml : jackson-core-asl, jackson-mapper-asl (4.* 이후부터는 jackson-core, jackson-databind)
+17. WEB-INF/spring/sqls/test.sql
+18. dto, dao, biz, controller
+19. src/main/resources/mybatis/member-mapper.xml
+19. WEB-INF/Spring/sqls/config.xml
