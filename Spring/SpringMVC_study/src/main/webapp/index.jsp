@@ -9,6 +9,6 @@
 <body>
 	<a href="home.do">home</a>
 	<a href="list.do">list</a>
-
+	<a href="loginform.do">login</a>
 </body>
 </html>
