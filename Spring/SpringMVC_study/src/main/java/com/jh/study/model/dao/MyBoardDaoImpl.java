@@ -74,4 +74,10 @@ public class MyBoardDaoImpl implements MyBoardDao {
 		return res;
 	}
 
+	@Override
+	public String test() {
+
+		return null;
+	}
+
 }

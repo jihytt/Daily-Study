@@ -14,4 +14,5 @@ public interface MyBoardDao {
 	public int update(MyBoardDto dto);
 	public int delete(int myno);
 
+	public String test();
 }

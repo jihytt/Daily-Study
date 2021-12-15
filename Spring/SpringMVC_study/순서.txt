@@ -51,3 +51,7 @@ _login
 18. dto, dao, biz, controller
 19. src/main/resources/mybatis/member-mapper.xml
 19. WEB-INF/Spring/sqls/config.xml
+
+_interceptor
+21. com.jh.study.common.interceptor/LoginInterceptor (impl HandlerInterceptor)
+22. WEB-INF/spring/appServlet/servlet-context.xml 이거만 입력하면 아무것도 안뜸

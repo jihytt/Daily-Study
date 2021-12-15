@@ -80,4 +80,10 @@ public class MyBoardController {
 		return "redirect:select.do?myno="+myno;
 	}
 
+	@RequestMapping("/test.do")
+	public String test() {
+		biz.test();
+		return "redirect:list.do";
+	}
+	
 }
