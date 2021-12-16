@@ -50,8 +50,22 @@ _login
 17. WEB-INF/spring/sqls/test.sql
 18. dto, dao, biz, controller
 19. src/main/resources/mybatis/member-mapper.xml
-19. WEB-INF/Spring/sqls/config.xml
+20. WEB-INF/Spring/sqls/config.xml
 
 _interceptor
 21. com.jh.study.common.interceptor/LoginInterceptor (impl HandlerInterceptor)
-22. WEB-INF/spring/appServlet/servlet-context.xml 이거만 입력하면 아무것도 안뜸
+22. WEB-INF/spring/appServlet/servlet-context.xml
+
+_transaction
+23. (MYBoard) dao, biz, controller
+24. WEB-INF/spring/appServlet/servlet-context.xml
+namespace에서 tx 체크
+25. WEB-INF/spring/appServlet/applicationContext.xml
+26. index.jsp
+27. LoginInterceptor
+
+_security
+28. pom.xml : spring-security-web
+29. WEB-INF/spring/appservlet/security-context.xml (Spring Bean Configuration File)
+30. web.xml
+31. (Member) dao, biz, controller

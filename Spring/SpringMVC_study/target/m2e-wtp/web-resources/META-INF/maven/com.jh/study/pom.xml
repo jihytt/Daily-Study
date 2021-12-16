@@ -164,7 +164,14 @@
 		    <groupId>org.codehaus.jackson</groupId>
 		    <artifactId>jackson-core-asl</artifactId>
 		    <version>1.9.13</version>
-		</dependency>      
+		</dependency>
+		<!-- pom.xml은 상위에 있는 dependency를 먼저 읽기 때문에 오류를 줄이기 위해 아래에 작성 -->
+		<dependency>
+    		<groupId>org.springframework.security</groupId>
+    		<artifactId>spring-security-web</artifactId>
+    		<version>${org.springframework-version}</version>
+		</dependency>
+		      
 	</dependencies>
     <build>
         <plugins>

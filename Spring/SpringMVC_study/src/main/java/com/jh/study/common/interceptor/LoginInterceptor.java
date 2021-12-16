@@ -12,10 +12,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 	
 	private Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		// Dispatcher Servlet에서 Controller 넘어가는 사이에서 동작할 것
+		// DispatcherServlet에서 Controller 넘어가는 사이에서 동작할 것
 		// 특정 조건에 맞으면 넘어가고 특정 조건에 안맞으면 다른 데로 넘어가게 할 수 있다.
 		logger.info("[Interceptor] : preHandle");
 		
