@@ -61,7 +61,10 @@
 			<td><input type="password" id="memberpw"/></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="button" value="login" onclick="login();"/></td>
+			<td colspan="2">
+				<input type="button" value="login" onclick="login();"/>
+				<input type="button" value="register" onclick="location.href='registerform.do'"/>	
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center" id="loginChk"></td>

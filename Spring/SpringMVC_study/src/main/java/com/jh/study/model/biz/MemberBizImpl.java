@@ -18,4 +18,10 @@ public class MemberBizImpl implements MemberBiz {
 		return dao.login(dto);
 	}
 
+	@Override
+	public int insert(MemberDto dto) {
+
+		return dao.insert(dto);
+	}
+
 }

@@ -7,7 +7,10 @@
 	<!-- DB설정 등 비지니스 로직 설정을 관리할 xml 설정 경로 지정 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/appServlet/applicationContext.xml</param-value>
+		<param-value>/WEB-INF/spring/appServlet/applicationContext.xml
+					/WEB-INF/spring/appServlet/aop-context.xml
+					/WEB-INF/spring/appServlet/security-context.xml
+		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
